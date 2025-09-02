@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -30,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
             isGrounded = false; // теперь в воздухе
         }
+        // Проверка падения ниже определенного уровня
+        if ((transform.position.y < -5f) | (transform.position.x < -14f))
+        {
+            FallReset();
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -59,4 +65,12 @@ public class PlayerMovement : MonoBehaviour
             movement.enabled = true;
         }
     }
-}
+        void FallReset()
+    {
+        movement.enabled = false;
+        GameManager.Instance.TakeDamage();
+        transform.position = startPosition;
+        rb.velocity = Vector3.zero;
+        movement.enabled = true;
+    }
+    }

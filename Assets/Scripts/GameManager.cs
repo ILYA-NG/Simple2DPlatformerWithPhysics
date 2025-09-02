@@ -4,14 +4,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
     bool gameHasEnded = false;
     public float restartDelay = 1f;
     public GameObject completeLevelUI;
-
     public int maxHealth = 5;
     public int currentHealth;
-
     public HealthBar healthBar;
 
     void Awake()

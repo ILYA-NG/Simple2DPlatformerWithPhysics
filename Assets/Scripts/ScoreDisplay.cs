@@ -1,10 +1,11 @@
 using UnityEngine;
-using TMPro;  // обязательно подключить пространство имён для TextMeshPro
+using TMPro;
+using UnityEngine.UI;  // обязательно подключить пространство имён для TextMeshPro
+using UnityEngine.SceneManagement;
 
 public class ScoreDisplay : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
-
     private int score = 0;
 
     void Start()
@@ -22,7 +23,9 @@ public class ScoreDisplay : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "Score: " + score.ToString();
+            string levelName = SceneManager.GetActiveScene().name;   
+            scoreText.text = "" + levelName + "\nScore: " + score.ToString();
+            scoreText.color = new Color(0f, 0f, 0.5f);
         }
     }
 }
