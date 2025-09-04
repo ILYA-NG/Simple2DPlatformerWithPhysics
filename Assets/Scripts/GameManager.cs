@@ -17,6 +17,12 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            // Инициализация здоровья при первом создании GameManager
+            if (currentHealth <= 0)
+            {
+                currentHealth = maxHealth;
+            }
+
         }
         else if (Instance != this)
         {
@@ -27,10 +33,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (currentHealth == 0)
-        {
-            currentHealth = maxHealth;
-        }
         UpdateHealthBar();
     }
 
