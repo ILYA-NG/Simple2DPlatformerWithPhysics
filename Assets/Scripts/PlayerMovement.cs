@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
             if (scoreDisplay != null)
             {
-                scoreDisplay.AddScore(1);
+               GameManager.Instance.AddScore(1);
             }
         }
         else if (collision.gameObject.CompareTag("ground"))

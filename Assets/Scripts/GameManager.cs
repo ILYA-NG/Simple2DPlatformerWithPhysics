@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public int maxHealth = 5;
     public int currentHealth;
     public HealthBar healthBar;
+    public int currentScore = 0; // Добавлено поле для очков
+    private ScoreDisplay scoreDisplay;
 
     void Awake()
     {
@@ -22,7 +24,7 @@ public class GameManager : MonoBehaviour
             {
                 currentHealth = maxHealth;
             }
-
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else if (Instance != this)
         {
@@ -62,7 +64,28 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    public void AddScore(int amount)
+    {
+        currentScore += amount;
+        UpdateScoreUI();
+    }
 
+    void UpdateScoreUI()
+{
+    if (scoreDisplay == null)
+    {
+        scoreDisplay = FindObjectOfType<ScoreDisplay>();
+    }
+
+    if (scoreDisplay != null)
+    {
+        scoreDisplay.UpdateScore(currentScore);
+    }
+    else
+    {
+        Debug.LogWarning("ScoreDisplay не найден в сцене для обновления UI");
+    }
+}
     public void CompleteLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
